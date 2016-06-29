@@ -4,14 +4,15 @@ services:
   db:
     image: mysql:latest
     environment:
-      - MYSQL_ROOT_PASSWORD:rootpass
+      - MYSQL_ROOT_PASSWORD=rootpass
+      - MYSQL_DATABASE=magento
   cache:
     image: redis:latest
   web:
+    build: .
     depends_on:
       - db
       - cache
-    build: .
     env_file:
       - .env
     ports:
