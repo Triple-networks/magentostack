@@ -5,9 +5,9 @@ conf/sites-enabled/*
 
 logs/**/*.log
 
+.env
+!.env.dist
+
 var/www/*
 !var/www/html/index.php
 
-.env
-!.env.dist
-var/www/writable.dirs
