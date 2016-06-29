@@ -22,14 +22,14 @@ Do an initial build
     $ sudo docker-compose build
     
 
-Run the containers
+Run docker-compose
     
     $ sudo docker-compose up
 
 
-
-## docker name (prob.)
-
+## Setup magento
 
 name: magentostack_web_1
+
+
 
