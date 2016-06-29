@@ -1,0 +1,13 @@
+.idea/
+
+conf/sites-enabled/*
+!conf/sites-enabled/000-default.conf
+
+logs/**/*.log
+
+var/www/*
+!var/www/html/index.php
+
+.env
+!.env.dist
+var/www/writable.dirs

@@ -1,0 +1,27 @@
+version: '2'
+
+services:
+  db:
+    image: mysql:latest
+    environment:
+      - MYSQL_ROOT_PASSWORD:rootpass
+  cache:
+    image: redis:latest
+  web:
+    depends_on:
+      - db
+      - cache
+    build: .
+    env_file:
+      - .env
+    ports:
+      - "80:80"
+      - "443:443"
+    links:
+      - db:mysqlhost
+      - cache:redishost
+    volumes:
+      - ./var/www:/var/www
+      - ./conf/sites-enabled:/etc/apache2/sites-enabled
+      - ./logs/apache2:/var/log/apache2
+      - ./logs/supervisor:/var/log/supervisor
