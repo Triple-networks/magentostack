@@ -92,7 +92,6 @@ WORKDIR /var/run
 # Ports
 ################################################################################
 
-EXPOSE 80 443
 
 ################################################################################
 # Entrypoint
@@ -100,5 +99,9 @@ EXPOSE 80 443
 
 COPY entrypoint.sh /usr/local/bin/
 
-ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
+ENTRYPOINT ["entrypoint.sh"]
+
+EXPOSE 80 443
+
+CMD [ "/usr/bin/supervisord", "-c", "/etc/supervisor/supervisord.conf" ]
 
