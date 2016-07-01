@@ -3,9 +3,8 @@ version: '2'
 services:
   db:
     image: mysql:latest
-    environment:
-      - MYSQL_ROOT_PASSWORD=rootpass
-      - MYSQL_DATABASE=magento
+    env_file:
+      - .env
   cache:
     image: redis:latest
   web:
@@ -15,6 +14,7 @@ services:
       - cache
     env_file:
       - .env
+    image: dkrud5g/magentostack
     ports:
       - "80:80"
       - "443:443"
