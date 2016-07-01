@@ -5,7 +5,7 @@
 
 Clone the repository local:
 
-    $ git clone git@github.com:Triple-networks/magentostack.git magentostack
+    $ git clone https://github.com/Triple-networks/magentostack.git
 
 Setup the .env-file
 
