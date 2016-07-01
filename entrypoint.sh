@@ -26,13 +26,19 @@ if [ "$1" = '/usr/bin/supervisord' -a "$2" = '-c' -a "$3" = '/etc/supervisor/sup
     # Empty supervisor logs directory
     if [ ! -d "${PROJECT_PATH}" ]; then
 
-        git clone -b "${PROJECT_BRANCH}" --single-branch "https://${GITHUB_OAUTH}:x-oauth-basic@${PROJECT_REPOSITORY}" "${PROJECT_PATH}"
+        if [ -z "$GITHUB_OAUTH" ]; then
 
-        cd "${PROJECT_PATH}"
+            git clone -b "${PROJECT_BRANCH}" --single-branch "https://${PROJECT_REPOSITORY}" "${PROJECT_PATH}"
+            cd "${PROJECT_PATH}"
+        else
+            git clone -b "${PROJECT_BRANCH}" --single-branch "https://${GITHUB_OAUTH}:x-oauth-basic@${PROJECT_REPOSITORY}" "${PROJECT_PATH}"
+            cd "${PROJECT_PATH}"
+            git remote set-url origin "https://${PROJECT_REPOSITORY}"
+            composer config -g "github-oauth.github.com" "${GITHUB_OAUTH}"
+        fi
 
-        git remote set-url origin "https://${PROJECT_REPOSITORY}"
 
-        composer config -g "github-oauth.github.com" "${GITHUB_OAUTH}"
+
 
 
         # Empty supervisor logs directory
