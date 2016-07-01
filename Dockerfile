@@ -86,7 +86,9 @@ WORKDIR /var/run
 # Volumes
 ################################################################################
 
-# VOLUME ["/var/www"]
+# VOLUME [ {"./var/www": "/var/www", "./conf/sites-enabled": "/etc/apache2/sites-enabled", "./logs/apache2": "/var/log/apache2", "./logs/supervisor": "/var/log/supervisor"} ]
+
+
 
 ################################################################################
 # Ports
