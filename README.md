@@ -9,6 +9,7 @@ Clone the repository local:
 
 Setup the .env-file
 
+    $ cd magentostack
     $ cp .env.dist .env
 
 Create a "personal access token" & add to the .env file
