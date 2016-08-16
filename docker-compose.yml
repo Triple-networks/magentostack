@@ -10,12 +10,13 @@ services:
       - .env.dist
       - .env
     image: dkrud5g/magentostack
-    ports:
-      - "80:80"
-      - "443:443"
     links:
       - db:mysqlhost
       - cache:redishost
+    ports:
+      - "80:80"
+      - "443:443"
+    restart: always
     volumes:
       - ./var/www:/var/www
       - ./conf/sites-enabled:/etc/apache2/sites-enabled
