@@ -1,7 +1,7 @@
 version: '2'
 
 services:
-  web:
+  magento:
     build: .
     depends_on:
       - db

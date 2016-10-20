@@ -25,7 +25,17 @@ Do an initial build
 
 Run docker-compose
 
-    $ sudo docker-compose up
+    $ sudo docker-compose up -d
+
+
+Bash into magento
+
+    $ sudo docker-composer run magento bash
+
+In the container:
+
+    $ composer config -g "github-oauth.github.com" "$GITHUB_OAUTH"
+    $ composer config -g "http-basic.repo.magento.com" "$MAGENTO_REPO_BASIC_AUTH_USER" "$MAGENTO_REPO_BASIC_AUTH_PASS"
 
 
 ## Setup magento
