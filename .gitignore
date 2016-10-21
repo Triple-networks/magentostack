@@ -1,7 +1,8 @@
 .idea/
 
+conf/sites-available/*
+!conf/sites-available/000-default.conf
 conf/sites-enabled/*
-!conf/sites-enabled/000-default.conf
 
 logs/**/*.log
 
