@@ -19,6 +19,7 @@ services:
     restart: always
     volumes:
       - ./var/www:/var/www
+      - ./conf/sites-available:/etc/apache2/sites-available
       - ./conf/sites-enabled:/etc/apache2/sites-enabled
       - ./logs/apache2:/var/log/apache2
       - ./logs/supervisor:/var/log/supervisor
@@ -29,3 +30,14 @@ services:
       - .env
   cache:
     image: redis:latest
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin:latest
+    depends_on:
+      - db
+    links:
+      - db:mysqlhost
+    environment:
+      - PMA_HOST=mysqlhost
+      - PMA_VERBOSE=mysqlhost
+      - PMA_USER=root
+      - PMA_PASSWORD=$MYSQL_ROOT_PASSWORD

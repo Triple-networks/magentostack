@@ -43,9 +43,13 @@ if [ "$1" = '/usr/bin/supervisord' -a "$2" = '-c' -a "$3" = '/etc/supervisor/sup
     fi
 
     # Set the vhost config
-    cp -pr /etc/apache2/sites-enabled/000-default.conf /etc/apache2/sites-enabled/001-project.conf
-    sed -i "s/example.com/${PROJECT_HOST}/g" /etc/apache2/sites-enabled/001-project.conf
-    sed -i "s+/var/www/html+${PROJECT_PATH}/${PROJECT_WEBROOT}+g" /etc/apache2/sites-enabled/001-project.conf
+    cp -pr /etc/apache2/sites-available/000-default.conf /etc/apache2/sites-available/001-${PROJECT_HOST}.conf
+    sed -i "s/example.com/${PROJECT_HOST}/g" /etc/apache2/sites-available/001-${PROJECT_HOST}.conf
+    sed -i "s+/var/www/html+${PROJECT_PATH}/${PROJECT_WEBROOT}+g" /etc/apache2/sites-available/001-${PROJECT_HOST}.conf
+
+    # remove active apache conf + link to project.conf
+    rm -f /etc/apache2/sites-enabled/*.conf
+    ln -s /etc/apache2/sites-available/001-${PROJECT_HOST}.conf /etc/apache2/sites-enabled/001-${PROJECT_HOST}.conf
 
 
     # Empty supervisor logs directory

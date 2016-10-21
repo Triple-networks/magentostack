@@ -76,6 +76,8 @@ COPY conf/php/xdebug-custom.ini "$PHP_INI_DIR/conf.d/xdebug-custom.ini"
 
 # Cron
 RUN chmod 600 /etc/crontab
+COPY conf/crontab.txt /var/crontab.txt
+RUN crontab /var/crontab.txt
 
 ################################################################################
 # WORKDIR
@@ -87,7 +89,7 @@ WORKDIR /var/run
 # Volumes
 ################################################################################
 
-# VOLUME [ {"./var/www": "/var/www", "./conf/sites-enabled": "/etc/apache2/sites-enabled", "./logs/apache2": "/var/log/apache2", "./logs/supervisor": "/var/log/supervisor"} ]
+# VOLUME [ {"./var/www": "/var/www", "./conf/sites-available": "/etc/apache2/sites-available", "./conf/sites-enabled": "/etc/apache2/sites-enabled", # "./logs/apache2": "/var/log/apache2", "./logs/supervisor": "/var/log/supervisor"} ]
 
 
 
