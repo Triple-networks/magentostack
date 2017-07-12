@@ -53,8 +53,9 @@ RUN apt-get autoremove -y \
 RUN rm -rf /var/lib/apt/lists
 
 # supervisord
+COPY conf/supervisord.conf /etc/supervisor/supervisord.conf
+COPY conf/supervisor.d /etc/supervisor/conf.d/
 RUN mkdir -p /var/log/supervisor
-COPY conf/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 
 # PHP
 
@@ -89,8 +90,12 @@ WORKDIR /var/run
 # Volumes
 ################################################################################
 
-# VOLUME [ {"./var/www": "/var/www", "./conf/sites-available": "/etc/apache2/sites-available", "./conf/sites-enabled": "/etc/apache2/sites-enabled", # "./logs/apache2": "/var/log/apache2", "./logs/supervisor": "/var/log/supervisor"} ]
-
+# Put cron logfiles into a volume. This also works around bug
+# https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=810669
+# caused by base image using old version of coreutils
+# which causes "tail: unrecognized file system type 0x794c7630 for '/var/log/cron.log'"
+# when using docker with overlay storage driver.
+VOLUME /var/log/
 
 
 ################################################################################

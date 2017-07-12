@@ -6,9 +6,12 @@ conf/sites-enabled/*
 
 logs/**/*.log
 
-.env
+.env*
 !.env.dist
 
 var/www/*
 !var/www/html/index.php
 
+var/phpmyadmin/*
+var/mysql/*
+var/events/*

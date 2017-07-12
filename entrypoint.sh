@@ -41,6 +41,8 @@ if [ "$1" = '/usr/bin/supervisord' -a "$2" = '-c' -a "$3" = '/etc/supervisor/sup
         echo "cleanup supervisord logs"
         rm -rf /var/log/supervisor/*.log
     fi
+    # touch /var/log/supervisor/cron.log
+
 
     # Set the vhost config
     cp -pr /etc/apache2/sites-available/000-default.conf /etc/apache2/sites-available/001-${PROJECT_HOST}.conf

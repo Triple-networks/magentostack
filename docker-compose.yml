@@ -6,6 +6,7 @@ services:
     depends_on:
       - db
       - cache
+      - phpmyadmin
     env_file:
       - .env.dist
       - .env
@@ -23,11 +24,14 @@ services:
       - ./conf/sites-enabled:/etc/apache2/sites-enabled
       - ./logs/apache2:/var/log/apache2
       - ./logs/supervisor:/var/log/supervisor
+      - ./var/events:/var/events
   db:
     image: mysql:latest
     env_file:
       - .env.dist
       - .env
+    volumes:
+      - ./var/mysql/datadir:/var/lib/mysql
   cache:
     image: redis:latest
   phpmyadmin:
@@ -41,3 +45,7 @@ services:
       - PMA_VERBOSE=mysqlhost
       - PMA_USER=root
       - PMA_PASSWORD=$MYSQL_ROOT_PASSWORD
+    volumes:
+      - ./var/phpmyadmin/config.user.inc.php:/www/config.user.inc.php
+      - ./var/phpmyadmin/sql:/www/sql
+

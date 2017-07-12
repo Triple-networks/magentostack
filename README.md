@@ -30,7 +30,7 @@ Run docker-compose
 
 Bash into magento
 
-    $ sudo docker-composer run magento bash
+    $ sudo docker-compose run magento bash
 
 In the container:
 
